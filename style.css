@@ -8,6 +8,11 @@
   font-weight: bold; 
 }
 
+.unknown {
+  color: darkblue;
+  text-decoration: underline;
+}
+
 body {
   margin: 80px 100px;
   background-color: aliceblue;
