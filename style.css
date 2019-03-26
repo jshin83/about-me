@@ -1,0 +1,31 @@
+.red {
+  color: darkred;
+  font-style: italic;
+}
+
+.green {
+  color: darkgreen;
+  font-weight: bold; 
+}
+
+body {
+  margin: 80px 100px;
+  background-color: aliceblue;
+}
+
+h1 {
+  font-family: 'Germania One', cursive;
+}
+
+div {
+  margin: 20px 25px;
+  padding: 10px 15px;
+  border-radius: 10px 5px;
+  font-family: 'PT Sans', sans-serif;
+  font-size: 16px;
+}
+
+footer {
+  font-family: 'Cedarville Cursive', cursive;
+
+}
