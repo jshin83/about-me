@@ -8,23 +8,37 @@
   font-weight: bold; 
 }
 
+.result {
+  font-family: 'PT Sans', sans-serif;
+  color: navy;
+  font-weight: 700;
+  font-size: 16px;
+}
+
 .unknown {
   color: darkblue;
   text-decoration: underline;
 }
 
+.main {
+  font-size: 50px;
+}
+
 body {
-  margin: 80px 100px;
+  margin: 125px 250px;
   background-color: aliceblue;
 }
 
-h1 {
+h1, h2 {
   font-family: 'Germania One', cursive;
 }
 
-div {
+h3 {
+  font-style: italic;
+}
+
+ul, h3, div, ol {
   margin: 20px 25px;
-  padding: 10px 15px;
   border-radius: 10px 5px;
   font-family: 'PT Sans', sans-serif;
   font-size: 16px;
