@@ -58,4 +58,3 @@ function convertToYesOrNo(input) {
     return 'na';
   }
 }
-
