@@ -21,7 +21,7 @@ for (let i = 0; i < questions.length; i++) {
   //response = response.toLowerCase();
   console.log ('response is ' + response);
   let validatedResponse = validateResponse(response.toLowerCase(), i);
-  results[i] = ((i + 1) + '. ' + questions[i] + " You answered : '" + response + "'. " + validatedResponse);
+  results[i] = ((i + 1) + '. ' + questions[i] + ' You answered : \'' + response + '\'. ' + validatedResponse);
 }
 
 //append text to document
@@ -35,13 +35,13 @@ function validateResponse(input, i) {
   let result = convertToYesOrNo(input);
   console.log('result ' + i + result);
 
-  if ( result === 'na') return '<span class = \'unknown\'>Response was not a form of yes or no I understand.<\span>'
+  if ( result === 'na') return '<span class = \'unknown\'>Response was not a form of yes or no I understand.<\span>';
   if ( result === answers[i]) {
-    console.log(result + ' you are in validate response')
-    return "<span class = \'green\'>That is correct! <\span>";
+    console.log(result + ' you are in validate response');
+    return '<span class = \'green\'>That is correct! </span>';
   } else {
-    console.log(result + ' you are in validate response')
-    return "<span class = \'red\'>That is incorrect. <\span>";
+    console.log(result + ' you are in validate response');
+    return '<span class = \'red\'>That is incorrect. </span>';
   }
 }
 
