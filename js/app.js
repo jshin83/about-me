@@ -16,7 +16,7 @@ alert('Great, ' + userName + '! Let\'s play a little game, shall we? First, I wi
 //array of my questions
 var questions = ['Is jen a vegetarian?', 'Does jen know how to drive manual transmission cars?', 'Does jen own any dogs?', 'Do you think jen plays sports?', 'Does jen like javascript?', 'How many cars has jen (personally) owned?', 'What fruit does jen like?'];
 
-var fruit = ['banana', 'bananas', 'apple', 'apples', 'melon', 'melons', 'watermelon', 'grapes'];
+var fruit = ['banana', 'bananas', 'apple', 'apples', 'melon', 'melons', 'watermelon', 'grape', 'grapes'];
 
 var results = [];
 var correct = 0;
@@ -34,7 +34,7 @@ for (let i = 0; i < questions.length; i++) {
       console.log('chances : ' + chances);
       let userNumber = prompt(questions[i]);
 
-      if(userNumber !== null && !isNaN(userNumber) && userName !== ' ') {
+      if(userNumber !== null && !isNaN(userNumber) && userName !== '') {
         userNumber.trim();
         if(userNumber > 5) {
           alert('Your guess is too high.');
@@ -43,7 +43,7 @@ for (let i = 0; i < questions.length; i++) {
           correct++;
           answerSix = 'correct.';
           chances = 0;
-        } else if (userName.length > 0) {
+        } else if (userName.trim().length === 0) {
           alert('Your response was not a number.');
         } else {
           alert('Your guess is too low.');
@@ -58,7 +58,7 @@ for (let i = 0; i < questions.length; i++) {
   } else if (i === 6) { //last question
     let count = 0;
     alert('Here is the last question. You get six attempts.');
-
+    var six = 'incorrectly.';
     var possibleAnswers = '';
 
     while(count < 6) {
@@ -67,6 +67,7 @@ for (let i = 0; i < questions.length; i++) {
 
       if(fruit.includes(response.toLowerCase())) {
         alert('Correct!');
+        six = 'correctly.';
         correct++;
         break;
       } else {
@@ -77,11 +78,13 @@ for (let i = 0; i < questions.length; i++) {
     //show the possible answers in fruit list
     for (let i = 0; i < fruit.length; i++) {
       if(i === fruit.length - 1) {
-        possibleAnswers += fruit[i];
+        possibleAnswers += fruit[i] + '.';
       } else {
         possibleAnswers += fruit[i] + ', ';
       }
     }
+    results[i] = ((i + 1) + '. ' + questions[i] + ' You answered this question ' + six);
+
     alert('The possible answers are : ' + possibleAnswers);
   } else {
     //questions 1 - 5
