@@ -6,110 +6,65 @@
  */
 'use strict';
 
-//notifies user s/he is about to answer questions
-alert('Hi there! Welcome to jen\'s about me page.');
 
-//get user name
-var userName = prompt('May I get your name, please?');
-alert('Great, ' + userName + '! Let\'s play a little game, shall we? First, I will ask five yes / no questions about jen.');
-
-//array of my questions
+//array of all my quiz questions
 var questions = ['Is jen a vegetarian?', 'Does jen know how to drive manual transmission cars?', 'Does jen own any dogs?', 'Do you think jen plays sports?', 'Does jen like javascript?', 'How many cars has jen (personally) owned?', 'What fruit does jen like?'];
 
+//answer array for question 7
 var fruit = ['banana', 'bananas', 'apple', 'apples', 'melon', 'melons', 'watermelon', 'grape', 'grapes', 'cantaloupe', 'avocado', 'avocados'];
 
 var results = [];
 var correct = 0;
+var response;
+var possibleAnswers = '';
+var answerSix;
+var userName;
+gameStart();
 
-//loop through questions, grab response, call validation
-for (let i = 0; i < questions.length; i++) {
-  let answerSix = 'incorrect';
+function gameStart() {
+  //notifies user s/he is about to answer questions
+  alert('Hi there! Welcome to jen\'s about me page.');
 
-  //question 6
-  if(i === 5) {
-    alert('Let\'s switch things up a bit. You get up to four tries to answer the next question.');
-    let chances = 4;
-    while(chances > 0) {
-      console.log('chances : ' + chances);
+  //get user name
+  userName = prompt('May I get your name, please?');
+  alert('Great, ' + userName + '! Let\'s play a little game, shall we? First, I will ask five yes / no questions about jen.');
 
-      let userNumber = prompt(questions[i]).trim();
+  //loop through questions, grab response, call validation
+  for (let i = 0; i < questions.length; i++) {
+    answerSix = 'incorrect';
 
-      userNumber = parseInt(userNumber); //response is currently string, verified via console
-
-      console.log('type of : ' + typeof(userNumber));
-      if(userNumber !== null && !isNaN(userNumber) && userName !== '') {
-        console.log('converted to int: ' + typeof(userNumber) + '. userNumber is ' + userNumber); //test
-        if(userNumber > 5) {
-          alert('Your guess is too high.');
-        } else if (userNumber === 5) {
-          alert('Great. You got it right.');
-          correct++;
-          answerSix = 'correct';
-          chances = 0;
-        } else {
-          alert('Your guess is too low.');
-        }
-      } else { //strings come here
-        alert('Your response was not a number.');
-      }
-      chances--;
+    //question 6
+    if(i === 5) {
+      question6(i);
+    } else if (i === 6) { //question 7
+      question7(i);
+      //show the possible answers in fruit list (valid answers)
+      displayFruitlist();
+    } else {
+      questionOneToFive(i);
     }
-    //add result 6 to results array
-    results[i] = ((i + 1) + '. ' + questions[i] + ' <span class = \'lined\'>You were ' + answerSix + '</span>.');
-  } else if (i === 6) { //question 7
-    let count = 0;
-    alert('Here is the last question. You get six attempts.');
-    var userLastResponse = 'incorrectly';
-    var possibleAnswers = '';
-
-    while(count < 6) {
-      let response = prompt(questions[i]);
-      response.trim();
-
-      if(fruit.includes(response.toLowerCase())) {
-        alert('Correct!');
-        userLastResponse = 'correctly';
-        correct++;
-        break;
-      } else {
-        alert('Nope, that answer is not on the list.');
-      }
-      count++;
-    }
-    //add result 7 to results array
-    results[i] = ((i + 1) + '. ' + questions[i] + ' <span class = \'lined\'>You answered this question ' + userLastResponse + '</span>.');
-
-    //show the possible answers in fruit list (valid answers)
-    for (let i = 0; i < fruit.length; i++) {
-      let punctuation;
-      if(i === fruit.length - 1) {
-        punctuation = '.';
-      } else {
-        punctuation = ', ';
-      }
-      possibleAnswers += fruit[i] + punctuation;
-    }
-    alert('The possible answers are : ' + possibleAnswers);
-  } else {
-    //questions 1 - 5
-    let response = prompt(questions[i]);
-    let validatedResponse = validateResponse(response.toLowerCase(), i);
-    //add result 7 to results array
-    results[i] = ((i + 1) + '. ' + questions[i] + ' You answered : \'' + response + '\'. ' + validatedResponse);
   }
-}
 
-//append text to document
-let heading = '<header><h1>Quiz Results</h1></header>';
-document.getElementById('hidden').innerHTML += heading;
-for(let i = 0; i <results.length; i++) {
-  document.getElementById('hidden').innerHTML += '<p>' + results[i] + '</p>';
+  //append text to document
+  let heading = '<header><h1>Quiz Results</h1></header>';
+  document.getElementById('hidden').innerHTML += heading;
+  for(let i = 0; i <results.length; i++) {
+    document.getElementById('hidden').innerHTML += '<p>' + results[i] + '</p>';
+  }
+  document.getElementById('hidden').innerHTML += '<p class = \'result\'>' + userName + ', you answered ' + correct + ' out of 7 questions correctly.</p>';
 }
-document.getElementById('hidden').innerHTML += '<p class = \'result\'>' + userName + ', you answered ' + correct + ' out of 7 questions correctly.</p>';
-
 /*
 The below functions were written during Lab 1. These handle questions 1 - 5.
 */
+
+
+//function to handle questions 1 - 5
+function questionOneToFive(i) {
+  response = prompt(questions[i]);
+  let validatedResponse = validateResponse(response.toLowerCase(), i);
+  //add result 7 to results array
+  results[i] = ((i + 1) + '. ' + questions[i] + ' You answered : \'' + response + '\'. ' + validatedResponse);
+}
 
 //function to validate response
 function validateResponse(input, i) {
@@ -138,4 +93,74 @@ function convertToYesOrNo(input) {
   } else {
     return 'na';
   }
+}
+
+//function to handle question 6
+function question6(i){
+  alert('Let\'s switch things up a bit. You get up to four tries to answer the next question.');
+  let chances = 4;
+  while(chances > 0) {
+    console.log('chances : ' + chances);
+
+    let userNumber = prompt(questions[i]).trim();
+
+    userNumber = parseInt(userNumber); //response is currently string, verified via console
+
+    console.log('type of : ' + typeof(userNumber));
+    if(userNumber !== null && !isNaN(userNumber) && userName !== '') {
+      console.log('converted to int: ' + typeof(userNumber) + '. userNumber is ' + userNumber); //test
+      if(userNumber > 5) {
+        alert('Your guess is too high.');
+      } else if (userNumber === 5) {
+        alert('Great. You got it right.');
+        correct++;
+        answerSix = 'correct';
+        chances = 0;
+      } else {
+        alert('Your guess is too low.');
+      }
+    } else { //strings come here
+      alert('Your response was not a number.');
+    }
+    chances--;
+  }
+  //add result 6 to results array
+  results[i] = ((i + 1) + '. ' + questions[i] + ' <span class = \'lined\'>You were ' + answerSix + '</span>.');
+}
+
+//function to handle question 7
+function question7(i) {
+  let count = 0;
+  alert('Here is the last question. You get six attempts.');
+  var userLastResponse = 'incorrectly';
+  while(count < 6) {
+    response = prompt(questions[i]);
+    response.trim();
+
+    if(fruit.includes(response.toLowerCase())) {
+      alert('Correct!');
+      userLastResponse = 'correctly';
+      correct++;
+      break;
+    } else {
+      alert('Nope, that answer is not on the list.');
+    }
+    count++;
+  }
+  //add result 7 to results array
+  results[i] = ((i + 1) + '. ' + questions[i] + ' <span class = \'lined\'>You answered this question ' + userLastResponse + '</span>.');
+}
+
+//helper function for question 7, that displays the fruit list to the user
+function displayFruitlist() {
+  for (let i = 0; i < fruit.length; i++) {
+    let punctuation;
+    if(i === fruit.length - 1) {
+      punctuation = '.';
+    } else {
+      punctuation = ', ';
+    }
+    possibleAnswers += fruit[i] + punctuation;
+  }
+  alert('The possible answers are : ' + possibleAnswers);
 }
