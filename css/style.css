@@ -9,14 +9,17 @@
 }
 
 .result {
-  font-family: 'PT Sans', sans-serif;
+  font-family: 'Germania One', cursive;
   color: navy;
-  font-weight: 700;
-  font-size: 16px;
+  font-size: 18px;
 }
 
 .unknown {
   color: darkblue;
+  text-decoration: underline;
+}
+
+.lined {
   text-decoration: underline;
 }
 
@@ -37,14 +40,12 @@ h3 {
   font-style: italic;
 }
 
-ul, h3, div, ol {
-  margin: 20px 25px;
-  border-radius: 10px 5px;
+ul, h3, div, ol, p {
   font-family: 'PT Sans', sans-serif;
   font-size: 16px;
+  color: rgb(17, 4, 34);
 }
 
 footer {
   font-family: 'Cedarville Cursive', cursive;
-
 }
