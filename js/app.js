@@ -19,15 +19,15 @@ var response;
 var possibleAnswers = '';
 var answerSix;
 var userName;
-gameStart();
 
-function gameStart() {
+startQuiz();
+
+function startQuiz() {
   //notifies user s/he is about to answer questions
   alert('Hi there! Welcome to jen\'s about me page.');
 
-  //get user name
-  userName = prompt('May I get your name, please?');
-  alert('Great, ' + userName + '! Let\'s play a little game, shall we? First, I will ask five yes / no questions about jen.');
+  //prompts user for name else gives default
+  getUserName();
 
   //loop through questions, grab response, call validation
   for (let i = 0; i < questions.length; i++) {
@@ -56,7 +56,6 @@ function gameStart() {
 /*
 The below functions were written during Lab 1. These handle questions 1 - 5.
 */
-
 
 //function to handle questions 1 - 5
 function questionOneToFive(i) {
@@ -93,6 +92,15 @@ function convertToYesOrNo(input) {
   } else {
     return 'na';
   }
+}
+
+function getUserName() {
+  //get user name
+  userName = prompt('May I get your name, please?');
+  if(userName === null || userName.trim() === '') {
+    userName = 'Forrest Gump';
+  }
+  alert('Great, ' + userName + '! Let\'s play a little game, shall we? First, I will ask five yes / no questions about jen.');
 }
 
 //function to handle question 6
